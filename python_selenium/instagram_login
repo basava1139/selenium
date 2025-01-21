@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 
 # Credentials (Replace with your actual Instagram username and password)
 USERNAME = "basava1139"
-PASSWORD = "supri"
+PASSWORD = "Blore"
 
 # Initialize the Chrome WebDriver
 driver = webdriver.Chrome()
