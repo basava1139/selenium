@@ -1,0 +1,45 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+# Credentials (Replace with your actual Instagram username and password)
+USERNAME = "basava1139"
+PASSWORD = "supri"
+
+# Initialize the Chrome WebDriver
+driver = webdriver.Chrome()
+
+try:
+    # Open Instagram
+    driver.get("https://www.instagram.com/")
+    driver.implicitly_wait(10)  # Wait for elements to load
+
+    # Input username
+    username_input = driver.find_element(By.NAME, "username")
+    username_input.send_keys(USERNAME)
+
+    # Input password
+    password_input = driver.find_element(By.NAME, "password")
+    password_input.send_keys(PASSWORD)
+
+    # Click login button
+    login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
+    login_button.click()
+
+    # Wait for the page to process login
+    time.sleep(10)
+
+    # Assert login success
+    home_icon = driver.find_element(By.XPATH, "//a[contains(@href, '/accounts/activity/')]")
+    assert home_icon.is_displayed(), "Login failed: Home icon not found."
+
+    print("Login successful!")
+
+except AssertionError as ae:
+    print(f"Assertion Error: {ae}")
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+finally:
+    # Quit the driver
+    driver.quit()
